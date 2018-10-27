@@ -10,7 +10,7 @@ namespace MVC_VIDEOS.Controllers
     {
         // GET: Cientes
         public ActionResult Index()
-        {
+        { 
             return View();
         }
 
