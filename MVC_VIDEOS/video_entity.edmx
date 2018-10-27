@@ -1,0 +1,443 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="bd_video_juegosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="alquileres">
+          <Key>
+            <PropertyRef Name="id_alquiler" />
+          </Key>
+          <Property Name="id_alquiler" Type="int" Nullable="false" />
+          <Property Name="ci_cliente" Type="bigint" />
+          <Property Name="id_juego" Type="int" />
+          <Property Name="fecha_alquier" Type="datetime" />
+          <Property Name="id_tipo_juego" Type="int" />
+        </EntityType>
+        <EntityType Name="clientes">
+          <Key>
+            <PropertyRef Name="cedula" />
+          </Key>
+          <Property Name="cedula" Type="bigint" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="apellidos" Type="varchar" MaxLength="50" />
+          <Property Name="direccion" Type="varchar" MaxLength="100" />
+          <Property Name="telefono" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="juegos">
+          <Key>
+            <PropertyRef Name="id_juego" />
+          </Key>
+          <Property Name="id_juego" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="tipo" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tipo_juego">
+          <Key>
+            <PropertyRef Name="id_tipo_juego" />
+          </Key>
+          <Property Name="id_tipo_juego" Type="int" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__alquilere__ci_cl__023D5A04">
+          <End Role="clientes" Type="Self.clientes" Multiplicity="0..1" />
+          <End Role="alquileres" Type="Self.alquileres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clientes">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="alquileres">
+              <PropertyRef Name="ci_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__alquilere__id_ju__03317E3D">
+          <End Role="juegos" Type="Self.juegos" Multiplicity="0..1" />
+          <End Role="alquileres" Type="Self.alquileres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="juegos">
+              <PropertyRef Name="id_juego" />
+            </Principal>
+            <Dependent Role="alquileres">
+              <PropertyRef Name="id_juego" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__alquilere__id_ti__173876EA">
+          <End Role="tipo_juego" Type="Self.tipo_juego" Multiplicity="0..1" />
+          <End Role="alquileres" Type="Self.alquileres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_juego">
+              <PropertyRef Name="id_tipo_juego" />
+            </Principal>
+            <Dependent Role="alquileres">
+              <PropertyRef Name="id_tipo_juego" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="insertar_alquileres" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_alquiler" Type="varchar" Mode="In" />
+          <Parameter Name="ci_cliente" Type="bigint" Mode="In" />
+          <Parameter Name="id_juego" Type="int" Mode="In" />
+          <Parameter Name="fecha_alquiler" Type="datetime" Mode="In" />
+          <Parameter Name="id_tipo_juego" Type="int" Mode="In" />
+        </Function>
+        <Function Name="insertar_clientes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cedula" Type="bigint" Mode="In" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="apellidos" Type="varchar" Mode="In" />
+          <Parameter Name="direccion" Type="varchar" Mode="In" />
+          <Parameter Name="telefono" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="insertar_juegos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="tipo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="insertar_tipo_juego" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_tipo_juego" Type="int" Mode="In" />
+          <Parameter Name="descripcion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="lista_cliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cedula" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="bd_video_juegosModelStoreContainer">
+          <EntitySet Name="alquileres" EntityType="Self.alquileres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="clientes" EntityType="Self.clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="juegos" EntityType="Self.juegos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipo_juego" EntityType="Self.tipo_juego" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__alquilere__ci_cl__023D5A04" Association="Self.FK__alquilere__ci_cl__023D5A04">
+            <End Role="clientes" EntitySet="clientes" />
+            <End Role="alquileres" EntitySet="alquileres" />
+          </AssociationSet>
+          <AssociationSet Name="FK__alquilere__id_ju__03317E3D" Association="Self.FK__alquilere__id_ju__03317E3D">
+            <End Role="juegos" EntitySet="juegos" />
+            <End Role="alquileres" EntitySet="alquileres" />
+          </AssociationSet>
+          <AssociationSet Name="FK__alquilere__id_ti__173876EA" Association="Self.FK__alquilere__id_ti__173876EA">
+            <End Role="tipo_juego" EntitySet="tipo_juego" />
+            <End Role="alquileres" EntitySet="alquileres" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bd_video_juegosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="alquileres">
+          <Key>
+            <PropertyRef Name="id_alquiler" />
+          </Key>
+          <Property Name="id_alquiler" Type="Int32" Nullable="false" />
+          <Property Name="ci_cliente" Type="Int64" />
+          <Property Name="id_juego" Type="Int32" />
+          <Property Name="fecha_alquier" Type="DateTime" Precision="3" />
+          <Property Name="id_tipo_juego" Type="Int32" />
+          <NavigationProperty Name="clientes" Relationship="Self.FK__alquilere__ci_cl__023D5A04" FromRole="alquileres" ToRole="clientes" />
+          <NavigationProperty Name="juegos" Relationship="Self.FK__alquilere__id_ju__03317E3D" FromRole="alquileres" ToRole="juegos" />
+          <NavigationProperty Name="tipo_juego" Relationship="Self.FK__alquilere__id_ti__173876EA" FromRole="alquileres" ToRole="tipo_juego" />
+        </EntityType>
+        <EntityType Name="clientes">
+          <Key>
+            <PropertyRef Name="cedula" />
+          </Key>
+          <Property Name="cedula" Type="Int64" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="alquileres" Relationship="Self.FK__alquilere__ci_cl__023D5A04" FromRole="clientes" ToRole="alquileres" />
+        </EntityType>
+        <EntityType Name="juegos">
+          <Key>
+            <PropertyRef Name="id_juego" />
+          </Key>
+          <Property Name="id_juego" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tipo" Type="Int32" />
+          <NavigationProperty Name="alquileres" Relationship="Self.FK__alquilere__id_ju__03317E3D" FromRole="juegos" ToRole="alquileres" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tipo_juego">
+          <Key>
+            <PropertyRef Name="id_tipo_juego" />
+          </Key>
+          <Property Name="id_tipo_juego" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="alquileres" Relationship="Self.FK__alquilere__id_ti__173876EA" FromRole="tipo_juego" ToRole="alquileres" />
+        </EntityType>
+        <Association Name="FK__alquilere__ci_cl__023D5A04">
+          <End Role="clientes" Type="Self.clientes" Multiplicity="0..1" />
+          <End Role="alquileres" Type="Self.alquileres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clientes">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="alquileres">
+              <PropertyRef Name="ci_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__alquilere__id_ju__03317E3D">
+          <End Role="juegos" Type="Self.juegos" Multiplicity="0..1" />
+          <End Role="alquileres" Type="Self.alquileres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="juegos">
+              <PropertyRef Name="id_juego" />
+            </Principal>
+            <Dependent Role="alquileres">
+              <PropertyRef Name="id_juego" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__alquilere__id_ti__173876EA">
+          <End Role="tipo_juego" Type="Self.tipo_juego" Multiplicity="0..1" />
+          <End Role="alquileres" Type="Self.alquileres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_juego">
+              <PropertyRef Name="id_tipo_juego" />
+            </Principal>
+            <Dependent Role="alquileres">
+              <PropertyRef Name="id_tipo_juego" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bd_video_juegosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="alquileres" EntityType="Self.alquileres" />
+          <EntitySet Name="clientes" EntityType="Self.clientes" />
+          <EntitySet Name="juegos" EntityType="Self.juegos" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="tipo_juego" EntityType="Self.tipo_juego" />
+          <AssociationSet Name="FK__alquilere__ci_cl__023D5A04" Association="Self.FK__alquilere__ci_cl__023D5A04">
+            <End Role="clientes" EntitySet="clientes" />
+            <End Role="alquileres" EntitySet="alquileres" />
+          </AssociationSet>
+          <AssociationSet Name="FK__alquilere__id_ju__03317E3D" Association="Self.FK__alquilere__id_ju__03317E3D">
+            <End Role="juegos" EntitySet="juegos" />
+            <End Role="alquileres" EntitySet="alquileres" />
+          </AssociationSet>
+          <AssociationSet Name="FK__alquilere__id_ti__173876EA" Association="Self.FK__alquilere__id_ti__173876EA">
+            <End Role="tipo_juego" EntitySet="tipo_juego" />
+            <End Role="alquileres" EntitySet="alquileres" />
+          </AssociationSet>
+          <FunctionImport Name="insertar_alquileres">
+            <Parameter Name="id_alquiler" Mode="In" Type="String" />
+            <Parameter Name="ci_cliente" Mode="In" Type="Int64" />
+            <Parameter Name="id_juego" Mode="In" Type="Int32" />
+            <Parameter Name="fecha_alquiler" Mode="In" Type="DateTime" />
+            <Parameter Name="id_tipo_juego" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="insertar_clientes">
+            <Parameter Name="cedula" Mode="In" Type="Int64" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="apellidos" Mode="In" Type="String" />
+            <Parameter Name="direccion" Mode="In" Type="String" />
+            <Parameter Name="telefono" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="insertar_juegos">
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="insertar_tipo_juego">
+            <Parameter Name="id_tipo_juego" Mode="In" Type="Int32" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="lista_cliente" ReturnType="Collection(bd_video_juegosModel.lista_cliente_Result)">
+            <Parameter Name="cedula" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="lista_cliente_Result">
+          <Property Type="Int32" Name="Column1" Nullable="true" />
+          <Property Type="String" Name="nombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="descripcion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="descripcion1" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="fecha_alquier" Nullable="true" Precision="23" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bd_video_juegosModelStoreContainer" CdmEntityContainer="bd_video_juegosEntities">
+          <EntitySetMapping Name="alquileres">
+            <EntityTypeMapping TypeName="bd_video_juegosModel.alquileres">
+              <MappingFragment StoreEntitySet="alquileres">
+                <ScalarProperty Name="id_alquiler" ColumnName="id_alquiler" />
+                <ScalarProperty Name="ci_cliente" ColumnName="ci_cliente" />
+                <ScalarProperty Name="id_juego" ColumnName="id_juego" />
+                <ScalarProperty Name="fecha_alquier" ColumnName="fecha_alquier" />
+                <ScalarProperty Name="id_tipo_juego" ColumnName="id_tipo_juego" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="clientes">
+            <EntityTypeMapping TypeName="bd_video_juegosModel.clientes">
+              <MappingFragment StoreEntitySet="clientes">
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="juegos">
+            <EntityTypeMapping TypeName="bd_video_juegosModel.juegos">
+              <MappingFragment StoreEntitySet="juegos">
+                <ScalarProperty Name="id_juego" ColumnName="id_juego" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="bd_video_juegosModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipo_juego">
+            <EntityTypeMapping TypeName="bd_video_juegosModel.tipo_juego">
+              <MappingFragment StoreEntitySet="tipo_juego">
+                <ScalarProperty Name="id_tipo_juego" ColumnName="id_tipo_juego" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="insertar_alquileres" FunctionName="bd_video_juegosModel.Store.insertar_alquileres" />
+          <FunctionImportMapping FunctionImportName="insertar_clientes" FunctionName="bd_video_juegosModel.Store.insertar_clientes" />
+          <FunctionImportMapping FunctionImportName="insertar_juegos" FunctionName="bd_video_juegosModel.Store.insertar_juegos" />
+          <FunctionImportMapping FunctionImportName="insertar_tipo_juego" FunctionName="bd_video_juegosModel.Store.insertar_tipo_juego" />
+          <FunctionImportMapping FunctionImportName="lista_cliente" FunctionName="bd_video_juegosModel.Store.lista_cliente">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bd_video_juegosModel.lista_cliente_Result">
+                <ScalarProperty Name="Column1" ColumnName="Column1" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="descripcion1" ColumnName="descripcion1" />
+                <ScalarProperty Name="fecha_alquier" ColumnName="fecha_alquier" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="bd_video_juegosModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="bd_video_juegosModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="bd_video_juegosModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="bd_video_juegosModel.Store.sp_helpdiagramdefinition" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="bd_video_juegosModel.Store.sp_helpdiagrams" />
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="bd_video_juegosModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="bd_video_juegosModel.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

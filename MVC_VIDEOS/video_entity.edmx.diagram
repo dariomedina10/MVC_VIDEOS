@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="98d7a89be01f472ebf96e1aee436a487" Name="Diagram1">
+        <EntityTypeShape EntityType="bd_video_juegosModel.alquileres" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_video_juegosModel.clientes" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_video_juegosModel.juegos" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_video_juegosModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_video_juegosModel.tipo_juego" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <AssociationConnector Association="bd_video_juegosModel.FK__alquilere__ci_cl__023D5A04" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_video_juegosModel.FK__alquilere__id_ju__03317E3D" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_video_juegosModel.FK__alquilere__id_ti__173876EA" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
