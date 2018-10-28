@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity;using System.Net;
 using System.Web.Mvc;
 
 namespace MVC_VIDEOS.Controllers
 {
     public class CientesController : Controller
+
     {
         // GET: Cientes
+        // instancia del objeto entity framework
+        private bd_video_juegosEntities db = new bd_video_juegosEntities();
         public ActionResult Index()
         { 
             return View();
