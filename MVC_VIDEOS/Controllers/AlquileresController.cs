@@ -1,71 +1,54 @@
-﻿using MVC_VIDEOS;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
 namespace MVC_VIDEOS.Controllers
 {
-    public class CientesController : Controller
-
+    public class AlquileresController : Controller
     {
-        // GET: Cientes
-        // instancia del objeto entity framework
-        private bd_video_juegosEntities db = new bd_video_juegosEntities();
+        // GET: Alquileres
         public ActionResult Index()
         {
-            ViewBag.clientes = db.clientes.ToList();
-
             return View();
-            
         }
 
-        // GET: Cientes/Details/5
+        // GET: Alquileres/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Cientes/Create
+        // GET: Alquileres/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Cientes/Create
+        // POST: Alquileres/Create
         [HttpPost]
-        public ActionResult Create(clientes clientes)
+        public ActionResult Create(FormCollection collection)
         {
             try
             {
                 // TODO: Add insert logic here
 
-                if (ModelState.IsValid)
-                {
-                    db.clientes.Add(clientes);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-                return View(clientes);
-
-                // return RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
             catch
             {
-                return View(clientes);
+                return View();
             }
         }
 
-        // GET: Cientes/Edit/5
+        // GET: Alquileres/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Cientes/Edit/5
+        // POST: Alquileres/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -81,13 +64,13 @@ namespace MVC_VIDEOS.Controllers
             }
         }
 
-        // GET: Cientes/Delete/5
+        // GET: Alquileres/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Cientes/Delete/5
+        // POST: Alquileres/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

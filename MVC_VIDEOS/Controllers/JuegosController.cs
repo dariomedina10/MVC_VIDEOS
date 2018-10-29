@@ -9,63 +9,52 @@ using System.Web.Mvc;
 
 namespace MVC_VIDEOS.Controllers
 {
-    public class CientesController : Controller
-
+    public class JuegosController : Controller
     {
-        // GET: Cientes
-        // instancia del objeto entity framework
+        // GET: Juegos
         private bd_video_juegosEntities db = new bd_video_juegosEntities();
         public ActionResult Index()
         {
-            ViewBag.clientes = db.clientes.ToList();
+            ViewBag.juegos = db.juegos.ToList();
 
             return View();
-            
         }
 
-        // GET: Cientes/Details/5
+        // GET: Juegos/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Cientes/Create
+        // GET: Juegos/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Cientes/Create
+        // POST: Juegos/Create
         [HttpPost]
-        public ActionResult Create(clientes clientes)
+        public ActionResult Create(FormCollection collection)
         {
             try
             {
                 // TODO: Add insert logic here
 
-                if (ModelState.IsValid)
-                {
-                    db.clientes.Add(clientes);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-                return View(clientes);
-
-                // return RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
             catch
             {
-                return View(clientes);
+                return View();
             }
         }
 
-        // GET: Cientes/Edit/5
+        // GET: Juegos/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Cientes/Edit/5
+        // POST: Juegos/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -81,13 +70,13 @@ namespace MVC_VIDEOS.Controllers
             }
         }
 
-        // GET: Cientes/Delete/5
+        // GET: Juegos/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Cientes/Delete/5
+        // POST: Juegos/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
