@@ -266,6 +266,10 @@
     <Content Include="Views\Tipojuego\Create.cshtml" />
     <Content Include="Views\Tipojuego\Edit.cshtml" />
     <Content Include="Views\Tipojuego\Delete.cshtml" />
+    <Content Include="Views\Cientes\Details.cshtml" />
+    <Content Include="Views\Cientes\Create.cshtml" />
+    <Content Include="Views\Cientes\Edit.cshtml" />
+    <Content Include="Views\Cientes\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

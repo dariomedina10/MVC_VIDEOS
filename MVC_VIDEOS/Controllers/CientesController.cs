@@ -24,9 +24,22 @@ namespace MVC_VIDEOS.Controllers
         }
 
         // GET: Cientes/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var clientes = db.clientes.Find(id);
+            if (clientes == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(clientes);
+
+
         }
 
         // GET: Cientes/Create
@@ -41,8 +54,6 @@ namespace MVC_VIDEOS.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
-
                 if (ModelState.IsValid)
                 {
                     db.clientes.Add(clientes);
@@ -50,8 +61,6 @@ namespace MVC_VIDEOS.Controllers
                     return RedirectToAction("Index");
                 }
                 return View(clientes);
-
-                // return RedirectToAction("Index");
             }
             catch
             {
@@ -60,47 +69,88 @@ namespace MVC_VIDEOS.Controllers
         }
 
         // GET: Cientes/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var clientes = db.clientes.Find(id);
+            if (clientes == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(clientes);
+
+
         }
 
         // POST: Cientes/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(clientes clientes)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(clientes).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(clientes);
             }
             catch
             {
-                return View();
+                return View(clientes);
             }
         }
 
         // GET: Cientes/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var clientes = db.clientes.Find(id);
+            if (clientes == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(clientes);
+
+
         }
 
         // POST: Cientes/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int? id, clientes clientes)
         {
             try
             {
-                // TODO: Add delete logic here
+                if (ModelState.IsValid)
+                {
+                    clientes = db.clientes.Find(id);
+                    if (clientes == null)
+                    {
+                        return HttpNotFound();
+                    }
 
-                return RedirectToAction("Index");
+                    db.clientes.Remove(clientes);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(clientes);
             }
             catch
             {
-                return View();
+                return View(clientes);
             }
+
         }
     }
 }
