@@ -257,6 +257,10 @@
     <Content Include="Views\Games\Edit.cshtml" />
     <Content Include="Views\Games\Index.cshtml" />
     <Content Include="Views\Games\Search.cshtml" />
+    <Content Include="Views\Juegos\Create.cshtml" />
+    <Content Include="Views\Juegos\Details.cshtml" />
+    <Content Include="Views\Juegos\Edit.cshtml" />
+    <Content Include="Views\Juegos\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

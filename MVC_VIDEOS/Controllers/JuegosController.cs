@@ -21,9 +21,21 @@ namespace MVC_VIDEOS.Controllers
         }
 
         // GET: Juegos/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var juegos = db.juegos.Find(id);
+            if (juegos == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(juegos);
+
         }
 
         // GET: Juegos/Create
@@ -34,62 +46,107 @@ namespace MVC_VIDEOS.Controllers
 
         // POST: Juegos/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(juegos juegos)
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.juegos.Add(juegos);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(juegos);
             }
             catch
             {
-                return View();
+                return View(juegos);
             }
         }
 
         // GET: Juegos/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var juegos = db.juegos.Find(id);
+            if (juegos == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(juegos);
+
         }
 
         // POST: Juegos/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(juegos juegos)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(juegos).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(juegos);
             }
             catch
             {
-                return View();
+                return View(juegos);
             }
+
         }
 
         // GET: Juegos/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var juegos = db.juegos.Find(id);
+            if (juegos == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(juegos);
+
         }
 
         // POST: Juegos/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int? id, juegos juegos)
         {
             try
             {
-                // TODO: Add delete logic here
+                if (ModelState.IsValid)
+                {
+                    juegos = db.juegos.Find(id);
+                    if (juegos == null)
+                    {
+                        return HttpNotFound();
+                    }
 
-                return RedirectToAction("Index");
+                    db.juegos.Remove(juegos);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(juegos);
             }
             catch
             {
-                return View();
+                return View(juegos);
             }
         }
+
     }
 }
+
