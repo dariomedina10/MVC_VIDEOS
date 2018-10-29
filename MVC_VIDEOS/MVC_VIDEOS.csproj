@@ -261,11 +261,15 @@
     <Content Include="Views\Juegos\Details.cshtml" />
     <Content Include="Views\Juegos\Edit.cshtml" />
     <Content Include="Views\Juegos\Delete.cshtml" />
+    <Content Include="Views\Tipojuego\Index.cshtml" />
+    <Content Include="Views\Tipojuego\Details.cshtml" />
+    <Content Include="Views\Tipojuego\Create.cshtml" />
+    <Content Include="Views\Tipojuego\Edit.cshtml" />
+    <Content Include="Views\Tipojuego\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Alquileres\" />
-    <Folder Include="Views\Tipojuego\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
