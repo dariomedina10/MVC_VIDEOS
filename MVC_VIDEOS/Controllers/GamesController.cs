@@ -27,7 +27,7 @@ namespace MVC_VIDEOS.Controllers
             if (!ModelState.IsValid)
                 return RedirectToAction("Index");
 
-            var result = db.alquileres.Where(f => f.ci_cliente == model.Cedula)
+            var result = db.alquileres.Where(f => f.ci_cliente == model.cedula)
                         .GroupBy(f => new { f.ci_cliente, f.id_juego })
                         .Select(f => new
                         {

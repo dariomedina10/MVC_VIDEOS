@@ -1,7 +1,58 @@
 ﻿
 @{
-    ViewBag.Title = "Search";
+    ViewBag.Title = "Buscar";
 }
 
-<h2>Search</h2>
+<h2>Buscar Cédula</h2>
 
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.cedula)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.apellidos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descripcion_juego)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descripcion_tipojuego)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.veces)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fecha_alquiler)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in (List<_Page_Views_Games_Search_cshtml>)ViewBag.alquileres)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.fecha_alquier)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.clientes.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.juegos.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tipo_juego.descripcion)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id_alquiler }) |
+              
+            </td>
+        </tr>
+    }
+
+</table>
