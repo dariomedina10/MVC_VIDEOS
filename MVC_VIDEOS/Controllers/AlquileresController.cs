@@ -1,6 +1,9 @@
-﻿using System;
+﻿using MVC_VIDEOS;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -9,8 +12,12 @@ namespace MVC_VIDEOS.Controllers
     public class AlquileresController : Controller
     {
         // GET: Alquileres
+        // instancia del objeto entity framework
+        private bd_video_juegosEntities db = new bd_video_juegosEntities();
         public ActionResult Index()
         {
+            ViewBag.alquileres = db.alquileres.ToList();
+
             return View();
         }
 
