@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebPages.Html;
+
 
 namespace MVC_VIDEOS.Controllers
 {
@@ -22,9 +24,21 @@ namespace MVC_VIDEOS.Controllers
         }
 
         // GET: Alquileres/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var alquileres = db.alquileres.Find(id);
+            if (alquileres == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(alquileres);
+
         }
 
         // GET: Alquileres/Create
@@ -35,62 +49,106 @@ namespace MVC_VIDEOS.Controllers
 
         // POST: Alquileres/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(alquileres alquileres)
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.alquileres.Add(alquileres);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(alquileres);
             }
             catch
             {
-                return View();
+                return View(alquileres);
             }
         }
 
         // GET: Alquileres/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var alquileres = db.alquileres.Find(id);
+            if (alquileres == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(alquileres);
+
         }
 
         // POST: Alquileres/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(alquileres alquileres)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(alquileres).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(alquileres);
             }
             catch
             {
-                return View();
+                return View(alquileres);
             }
+
         }
 
         // GET: Alquileres/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var alquileres = db.alquileres.Find(id);
+            if (alquileres == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(alquileres);
+
         }
 
         // POST: Alquileres/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int? id, alquileres alquileres)
         {
             try
             {
-                // TODO: Add delete logic here
+                if (ModelState.IsValid)
+                {
+                    alquileres = db.alquileres.Find(id);
+                    if (alquileres == null)
+                    {
+                        return HttpNotFound();
+                    }
 
-                return RedirectToAction("Index");
+                    db.alquileres.Remove(alquileres);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(alquileres);
             }
             catch
             {
-                return View();
+                return View(alquileres);
             }
+
         }
     }
 }

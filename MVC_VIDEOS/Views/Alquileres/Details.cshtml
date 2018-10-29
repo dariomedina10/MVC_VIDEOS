@@ -1,0 +1,50 @@
+﻿@model MVC_VIDEOS.alquileres
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>Alquileres</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_alquier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_alquier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.clientes.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.clientes.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.juegos.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.juegos.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipo_juego.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipo_juego.descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_alquiler }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

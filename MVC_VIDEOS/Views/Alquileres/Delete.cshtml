@@ -1,0 +1,56 @@
+﻿@model MVC_VIDEOS.alquileres
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Borrar</h2>
+
+<h3>Esta Seguro de Eliminar El registro?</h3>
+<div>
+    <h4>alquileres</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_alquier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_alquier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.clientes.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.clientes.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.juegos.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.juegos.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipo_juego.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipo_juego.descripcion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
