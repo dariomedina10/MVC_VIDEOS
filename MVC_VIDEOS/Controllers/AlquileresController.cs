@@ -19,7 +19,7 @@ namespace MVC_VIDEOS.Controllers
         public ActionResult Index()
         {
             ViewBag.alquileres = db.alquileres.ToList();
-
+            
             return View();
         }
 
