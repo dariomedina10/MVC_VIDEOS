@@ -29,16 +29,16 @@ namespace MVC_VIDEOS.Services
                            join tj in db.tipo_juego on ju.tipo equals tj.id_tipo_juego
                            select new LastClientRentViewModel()
                            {
-                               GameTypeId = ju.tipo.Value,
-                               GamesId = item.id_juego.Value,
+                               id_tipo_juego = ju.tipo.Value,
+                               id_juego = item.id_juego.Value,
                                Cedula = cli.cedula,
-                               ClientName = cli.nombre,
-                               ClientLastName = cli.apellidos,
-                               Game = ju.nombre,
-                               GameDescription = ju.descripcion,
-                               GameType = tj.descripcion,
-                               Count = item.cantidad,
-                               RentDate = item.fecha_alquiler.Value
+                               Nombre = cli.nombre,
+                               Apellido = cli.apellidos,
+                               Juego = ju.nombre,
+                               Description_juego = ju.descripcion,
+                               tipojuego = tj.descripcion,
+                               Cantidad = item.cantidad,
+                               fecha_alquiler = item.fecha_alquiler.Value
                            };
             return response.ToList();
         }
@@ -56,21 +56,21 @@ namespace MVC_VIDEOS.Services
                 cli = db.clientes.FirstOrDefault(f => f.cedula == model.Cedula);
                 if (cli != null)
                 {
-                    cli.nombre = model.ClientName;
-                    cli.apellidos = model.ClientLastName;
+                    cli.nombre = model.Nombre;
+                    cli.apellidos = model.Apellido;
                     db.Entry(cli).State = EntityState.Modified;
                 }
-                ju = db.juegos.FirstOrDefault(f => f.id_juego == model.GamesId);
+                ju = db.juegos.FirstOrDefault(f => f.id_juego == model.id_juego);
                 if (ju != null)
                 {
-                    ju.nombre = model.Game;
-                    ju.descripcion = model.GameDescription;
+                    ju.nombre = model.Juego;
+                    ju.descripcion = model.Description_juego;
                     db.Entry(ju).State = EntityState.Modified;
                 }
-                tj = db.tipo_juego.FirstOrDefault(f => f.id_tipo_juego == model.GameTypeId);
+                tj = db.tipo_juego.FirstOrDefault(f => f.id_tipo_juego == model.id_tipo_juego);
                 if (tj != null)
                 {
-                    tj.descripcion = model.GameType;
+                    tj.descripcion = model.tipojuego;
                     db.Entry(tj).State = EntityState.Modified;
                 }
             }

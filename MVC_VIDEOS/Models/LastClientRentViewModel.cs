@@ -7,16 +7,16 @@ namespace MVC_VIDEOS.Models
 {
     public class LastClientRentViewModel
     {
-        public int GamesId { get; set; }
-        public int GameTypeId { get; set; }
+        public int id_juego { get; set; }
+        public int id_tipo_juego { get; set; }
         public long Cedula { get; set; }
-        public string ClientName { get; set; }
-        public string ClientLastName { get; set; }
-        public string Client => $"{ClientName} {ClientLastName}";
-        public int Count { get; set; }
-        public string Game { get; set; }
-        public string GameDescription { get; set; }
-        public string GameType { get; set; }
-        public DateTime RentDate { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public string Cliente => $"{Nombre} {Apellido}";
+        public int Cantidad { get; set; }
+        public string Juego { get; set; }
+        public string Description_juego { get; set; }
+        public string tipojuego { get; set; }
+        public DateTime fecha_alquiler { get; set; }
     }
 }
