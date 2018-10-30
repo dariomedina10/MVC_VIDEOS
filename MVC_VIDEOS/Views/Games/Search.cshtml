@@ -1,58 +1,70 @@
-﻿
+﻿@using MVC_VIDEOS.Models;
+@model IEnumerable<LastClientRentViewModel>
+
 @{
     ViewBag.Title = "Buscar";
 }
 
 <h2>Buscar Cédula</h2>
 
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.cedula)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.apellidos)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.descripcion_juego)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.descripcion_tipojuego)
-        </th>
-
-        <th>
-            @Html.DisplayNameFor(model => model.veces)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fecha_alquiler)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in (List<_Page_Views_Games_Search_cshtml>)ViewBag.alquileres)
-    {
+@using (Html.BeginForm("Edit", "Games", FormMethod.Post))
+{
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.fecha_alquier)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.clientes.nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.juegos.nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.tipo_juego.descripcion)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.id_alquiler }) |
-              
-            </td>
-        </tr>
-    }
+            <th>
+                @Html.DisplayNameFor(model => model.Cedula)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Game)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GameDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GameType)
+            </th>
 
-</table>
+            <th>
+                @Html.DisplayNameFor(model => model.Count)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RentDate)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cedula)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Client)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Game)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GameDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GameType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Count)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RentDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", item,)
+                </td>
+            </tr>
+        }
+    </table>
+
+}

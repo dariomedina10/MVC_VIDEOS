@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MVC_VIDEOS;
 using MVC_VIDEOS.Models;
+using MVC_VIDEOS.Services;
 
 namespace MVC_VIDEOS.Controllers
 {
@@ -27,40 +28,7 @@ namespace MVC_VIDEOS.Controllers
             if (!ModelState.IsValid)
                 return RedirectToAction("Index");
 
-            var result = db.alquileres.Where(f => f.ci_cliente == model.cedula)
-                        .GroupBy(f => new { f.ci_cliente, f.id_juego })
-                        .Select(f => new
-                        {
-                            f.Key.ci_cliente,
-                            f.Key.id_juego,
-                            fecha_alquiler = f.Max(g => g.fecha_alquier).ToString(),
-                            cantidad = f.Count()
-                        }).Join(db.clientes, a => a.ci_cliente, b => b.cedula, (a,b) => new
-                        {
-                            a.ci_cliente,
-                            cliente = b.nombre +" "+ b.apellidos,
-                            a.id_juego,
-                            a.fecha_alquiler,
-                            a.cantidad
-                        }).Join(db.juegos, a => a.id_juego, b => b.id_juego, (a,b) => new
-                        {
-                            a.ci_cliente,
-                            a.cliente,
-                            juego = b.nombre,
-                            juego_des = b.descripcion,
-                            b.tipo,
-                            a.cantidad
-                        }).Join(db.tipo_juego, a => a.tipo, b => b.id_tipo_juego, (a,b) => new
-                        {
-                            a.ci_cliente,
-                            a.cliente,
-                            a.juego,
-                            a.juego_des,
-                            juego_tipo = b.descripcion,
-                            a.cantidad
-                        });
-
-            return View("Index", result.ToList());
+            return View(GamesDbService.LastClientRent(db, model.cedula));
         }
 
         // GET: Games/Details/5
@@ -102,7 +70,7 @@ namespace MVC_VIDEOS.Controllers
         }
 
         // GET: Games/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(long? id)
         {
             if (id == null)
             {
@@ -121,15 +89,15 @@ namespace MVC_VIDEOS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_juego,nombre,descripcion,tipo")] juegos juegos)
+        public ActionResult Edit(LastClientRentViewModel model)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(juegos).State = EntityState.Modified;
-                db.SaveChanges();
+
+                GamesDbService.EditLastClientRent(db, model);
                 return RedirectToAction("Index");
             }
-            return View(juegos);
+            return View(db.juegos);
         }
 
         // GET: Games/Delete/5
