@@ -1,12 +1,39 @@
-﻿@model MVC_VIDEOS.alquileres
+﻿@using MVC_VIDEOS.Services
+@model MVC_VIDEOS.alquileres
 
 @{
     ViewBag.Title = "Create";
+
+    var listClientes = new List<SelectListItem>();
+    listClientes.AddRange(GamesDbService.AllClients()
+        .Select(f => new SelectListItem()
+        {
+            Text = f.nombre + " " + f.apellidos,
+            Value = f.cedula.ToString()
+        }));
+
+    var listJuegos = new List<SelectListItem>();
+    listJuegos.AddRange(GamesDbService.AllGames()
+        .Select(f => new SelectListItem()
+        {
+            Text = f.nombre,
+            Value = f.id_juego.ToString()
+        }));
+
+    var listTiposJuegos = new List<SelectListItem>();
+    listTiposJuegos.AddRange(GamesDbService.AllGamesTypes()
+        .Select(f => new SelectListItem()
+        {
+            Text = f.descripcion,
+            Value = f.id_tipo_juego.ToString()
+        }));
+
+
 }
 
 <h2>Crear Nuevo</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Alquileres", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     
@@ -15,26 +42,17 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.id_alquiler, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ci_cliente, "Cliente", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.id_alquiler, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.id_alquiler, "", new { @class = "text-danger" })
+                @Html.DropDownList("ci_cliente", listClientes, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ci_cliente, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ci_cliente, "ci_cliente", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.id_juego, "Juego", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("ci_cliente", null, htmlAttributes: new { @class = "form-control" })
-                
-                    @Html.ValidationMessageFor(model => model.ci_cliente, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.id_juego, "id_juego", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("id_juego", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("id_juego", listJuegos, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.id_juego, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -42,15 +60,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.fecha_alquier, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.fecha_alquier, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.fecha_alquier, new { htmlAttributes = new { type = "date", @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.fecha_alquier, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.id_tipo_juego, "id_tipo_juego", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.id_tipo_juego, "Tipo Juego", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("id_tipo_juego", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("id_tipo_juego", listTiposJuegos, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.id_tipo_juego, "", new { @class = "text-danger" })
             </div>
         </div>

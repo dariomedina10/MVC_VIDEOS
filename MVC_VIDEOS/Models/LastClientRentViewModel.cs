@@ -7,6 +7,7 @@ namespace MVC_VIDEOS.Models
 {
     public class LastClientRentViewModel
     {
+        public Guid Id { get; } = Guid.NewGuid();
         public int id_juego { get; set; }
         public int id_tipo_juego { get; set; }
         public long Cedula { get; set; }

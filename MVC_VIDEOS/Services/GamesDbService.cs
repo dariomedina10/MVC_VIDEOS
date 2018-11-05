@@ -10,7 +10,25 @@ namespace MVC_VIDEOS.Services
 {
     public static class GamesDbService
     {
-        public static List<LastClientRentViewModel> LastClientRent(bd_video_juegosEntities db, long cedula)
+        public static List<juegos> AllGames(bd_video_juegosEntities db = null)
+        {
+            if (db is null) db = new bd_video_juegosEntities();
+            return db.juegos.ToList();
+        }
+
+        public static List<tipo_juego> AllGamesTypes(bd_video_juegosEntities db = null)
+        {
+            if (db is null) db = new bd_video_juegosEntities();
+            return db.tipo_juego.ToList();
+        }
+
+        public static List<clientes> AllClients(bd_video_juegosEntities db = null)
+        {
+            if (db is null) db = new bd_video_juegosEntities();
+            return db.clientes.ToList();
+        }
+
+        public static LastClientRentViewModel LastClientRent(bd_video_juegosEntities db, long cedula)
         {
             if (db is null) throw new Exception("db parameter is null");
 
@@ -40,7 +58,7 @@ namespace MVC_VIDEOS.Services
                                Cantidad = item.cantidad,
                                fecha_alquiler = item.fecha_alquiler.Value
                            };
-            return response.ToList();
+            return response.FirstOrDefault();
         }
 
         public static void EditLastClientRent(bd_video_juegosEntities db, LastClientRentViewModel model)

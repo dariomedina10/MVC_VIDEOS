@@ -171,8 +171,13 @@
     <Compile Include="lista_cliente_Result.cs">
       <DependentUpon>video_entity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\alquileres.cs" />
+    <Compile Include="Models\clientes.cs" />
     <Compile Include="Models\GameFilterModel.cs" />
+    <Compile Include="Models\juegos.cs" />
     <Compile Include="Models\LastClientRentViewModel.cs" />
+    <Compile Include="Models\tipo_juego.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\GamesDbService.cs" />
     <Compile Include="sysdiagrams.cs">
@@ -230,7 +235,9 @@
       <DependentUpon>video_entity.edmx</DependentUpon>
       <LastGenOutput>video_entity.cs</LastGenOutput>
     </Content>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -258,7 +265,7 @@
     <Content Include="Views\Games\Details.cshtml" />
     <Content Include="Views\Games\Edit.cshtml" />
     <Content Include="Views\Games\Index.cshtml" />
-    <Content Include="Views\Games\Search.cshtml" />
+    <Content Include="Views\Games\OSearch.cshtml" />
     <Content Include="Views\Juegos\Create.cshtml" />
     <Content Include="Views\Juegos\Details.cshtml" />
     <Content Include="Views\Juegos\Edit.cshtml" />
@@ -277,6 +284,7 @@
     <Content Include="Views\Alquileres\Create.cshtml" />
     <Content Include="Views\Alquileres\Edit.cshtml" />
     <Content Include="Views\Alquileres\Delete.cshtml" />
+    <Content Include="Views\Games\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,140 @@
+﻿@using MVC_VIDEOS.Models;
+@model IEnumerable<LastClientRentViewModel>
+
+@{
+    ViewBag.Title = "Buscar";
+}
+
+<script>
+    var selectedRow = "@Guid.Empty";
+    function changeSelectedIndex(id) {
+        selectedRow = id;
+        $("#mdl_cli_firstname").val($(`#${id} td input`)[0].value);
+        $("#mdl_cli_lastname").val($(`#${id} td input`)[1].value);
+        $("#mdl_game").val($(`#${selectedRow} td`)[2].innerHTML.trim());
+        $("#mdl_game_des").val($(`#${selectedRow} td`)[3].innerHTML.trim());
+    }
+</script>
+
+<h2>Buscar Cédula</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Cedula)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cliente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Juego)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description_juego)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tipojuego)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fecha_alquiler)
+        </th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr id="@item.Id">
+        <td>
+            @Html.DisplayFor(modelItem => item.Cedula)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Juego)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description_juego)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tipojuego)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cantidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha_alquiler)
+        </td>
+        <td>
+            @*Html.ActionLink("Edit", "Edit", item.Cedula)*@
+            <a data-toggle="modal" href="#editModal" onclick="changeSelectedIndex('@item.Id')">Edit</a>
+        </td>
+        <td><input hidden value="@item.Nombre" name="cli-firstname" /></td>
+        <td><input hidden value="@item.Apellido" name="cli-lastname" /></td>
+        <td><input hidden value="@item.id_juego" name="game-id" /></td>
+        <td><input hidden value="@item.id_tipo_juego" name="ametype-id" /></td>
+    </tr>
+    }
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="editModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Edit", "Games", FormMethod.Post))
+                {
+                    <input hidden name="cedula" />
+                    <input hidden name="id_juego" />
+                    <input hidden name="id_tipo_juego" />
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Nombre</label>
+                        <div class="col-md-10">
+                            <input id="mdl_cli_firstname" class="form-control" type="text" name="nombre" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Apellido</label>
+                        <div class="col-md-10">
+                            <input id="mdl_cli_lastname" class="form-control" type="text" name="apellido" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Juego</label>
+                        <div class="col-md-10">
+                            <input id="mdl_game" class="form-control" type="text" name="juego" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Decripcion</label>
+                        <div class="col-md-10">
+                            <input id="mdl_game_des" class="form-control" type="text" name="description_juego" />
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
